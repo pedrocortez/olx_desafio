@@ -6,6 +6,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.2'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
     }
 }
 
@@ -17,4 +18,20 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+// Define versions in a single place
+ext {
+    // App dependencies
+
+    androidCompileSdkVersion = 24
+    androidBuildToolsVersion = "24.0.1"
+    androidSupportVersion = '24.1.1'
+
+    gsonVersion = '2.7'
+
+    butterKniveVersion = '8.2.1'
+
+    circleimageviewVersion = '2.0.0'
+    picassoVersion = '2.5.2'
 }

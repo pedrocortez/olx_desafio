@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Desafio</string>
+    <string name="generic_error">Ocorreu um erro inesperado</string>
 </resources>

@@ -8,6 +8,7 @@ import android.view.View;
 
 import java.util.List;
 
+import br.com.cortez.desafio.ChallengeApplication;
 import br.com.cortez.desafio.R;
 import br.com.cortez.desafio.adapter.AdAdapter;
 import br.com.cortez.desafio.adapter.decoration.VerticalSelectionDividerItemDecoration;
@@ -49,10 +50,21 @@ public class AdsListAct extends AppCompatActivity implements ListAdsView{
         listAds.setLayoutManager(linearLayoutManager);
 
 
-        adsListPresenter = new AdsListPresenter(this);
+        adsListPresenter = ChallengeApplication.getInstance().provideAdsListPresenter(this);
         adsListPresenter.loadViews();
 
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adsListPresenter.resume();
+    }
+
+    @Override
+    protected void onPause() {
+        adsListPresenter.pause();
+        super.onPause();
     }
 
     @Override

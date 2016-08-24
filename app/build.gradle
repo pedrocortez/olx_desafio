@@ -34,9 +34,13 @@ dependencies {
     compile "com.jakewharton:butterknife:$rootProject.ext.butterKniveVersion"
     apt "com.jakewharton:butterknife-compiler:$rootProject.ext.butterKniveVersion"
 
-    compile "de.hdodenhof:circleimageview:$rootProject.ext.circleimageviewVersion"
-
     compile "com.squareup.picasso:picasso:$rootProject.ext.picassoVersion"
+
+    compile "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+
+
+    compile "com.squareup:otto:$rootProject.ext.ottoVersion"
 
 
     testCompile 'junit:junit:4.12'

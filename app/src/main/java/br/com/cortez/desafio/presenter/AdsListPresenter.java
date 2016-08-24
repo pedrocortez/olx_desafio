@@ -1,19 +1,11 @@
 package br.com.cortez.desafio.presenter;
 
-import android.content.Context;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
+import com.squareup.otto.Subscribe;
 
 import br.com.cortez.desafio.ChallengeApplication;
-import br.com.cortez.desafio.model.Ad;
+import br.com.cortez.desafio.presenter.event.LoadAdsFailed;
+import br.com.cortez.desafio.presenter.event.LoadAdsSuccess;
+import br.com.cortez.desafio.repository.AdRepository;
 import br.com.cortez.desafio.view.ListAdsView;
 
 /**
@@ -23,60 +15,37 @@ import br.com.cortez.desafio.view.ListAdsView;
 public class AdsListPresenter {
 
     private ListAdsView listAdsView;
+    private AdRepository adRepository;
 
-    public AdsListPresenter(ListAdsView listAdsView) {
+    public AdsListPresenter(ListAdsView listAdsView, AdRepository adRepository) {
         this.listAdsView = listAdsView;
+        this.adRepository = adRepository;
     }
 
     public void loadViews() {
         listAdsView.showLoading();
-        onLoadAdsSuccess();
+        adRepository.getAds();
     }
 
-    public void onLoadAdsSuccess() {
-
+    @Subscribe
+    public void onLoadAdsSuccess(LoadAdsSuccess loadAdsSuccess) {
         listAdsView.hideLoading();
-        listAdsView.showAds(readFromAssetsToShowAds());
-
+        listAdsView.showAds(loadAdsSuccess.getAds());
     }
 
-    private List<Ad> readFromAssetsToShowAds() {
-        BufferedReader reader = null;
-        List<Ad> ads = null;
-        try {
-            reader = new BufferedReader(
-                    new InputStreamReader(getContext().getAssets().open("ads.json"), "UTF-8"));
-
-            // do reading, usually loop until end of file reading
-            String mLine;
-            StringBuffer jsonStr  = new StringBuffer("");
-
-
-            while ((mLine = reader.readLine()) != null) {
-                jsonStr.append(mLine);
-            }
-
-            Type listType = new TypeToken<ArrayList<Ad>>(){}.getType();
-
-            ads = new Gson().fromJson(jsonStr.toString(), listType);
-
-
-        } catch (IOException e) {
-            //log the exception
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    //log the exception
-                }
-            }
-        }
-        return ads;
+    @Subscribe
+    public void onFailedLoadAds(LoadAdsFailed loadAdsFailed) {
+        listAdsView.hideLoading();
+        listAdsView.showError();
     }
 
-    private Context getContext() {
-        return ChallengeApplication.getInstance();
+
+    public void resume() {
+        ChallengeApplication.getInstance().provideBus().register(this);
+    }
+
+    public void pause() {
+        ChallengeApplication.getInstance().provideBus().unregister(this);
     }
 
 }

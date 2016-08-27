@@ -24,10 +24,11 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.ViewHolder> {
 
     private List<Ad> ads;
     private ImageLoader imageLoader;
-    private WeakReference<Context> contextWeakReference;
+    private OnAdClickListener onAdClickListener;
 
-    public AdAdapter( ) {
+    public AdAdapter(OnAdClickListener onAdClickListener) {
         ads = new ArrayList<>();
+        this.onAdClickListener = onAdClickListener;
         imageLoader = ChallengeApplication.getInstance().provideImageLoader();
     }
 
@@ -39,7 +40,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Ad ad = ads.get(position);
+        final Ad ad = ads.get(position);
 
         imageLoader.load(ad.getPhotos().getThumbnail(), holder.thumbnail);
 
@@ -48,6 +49,12 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.ViewHolder> {
         holder.date.setText(ad.getDate());
         holder.price.setText(ad.getFormattedPrice());
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onAdClickListener.onClick(ad);
+            }
+        });
     }
 
     @Override
@@ -57,14 +64,6 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.ViewHolder> {
 
     public void addItens(List<Ad> ads) {
         this.ads.addAll(ads);
-    }
-
-
-    private Context getContext() {
-        if(contextWeakReference == null || contextWeakReference.get() == null) {
-            contextWeakReference = new WeakReference<Context>(ChallengeApplication.getInstance());
-        }
-        return contextWeakReference.get();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -82,5 +81,13 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.ViewHolder> {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
+
+
+    }
+
+    public interface OnAdClickListener {
+
+        void onClick(Ad ad);
     }
 }

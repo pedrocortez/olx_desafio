@@ -40,7 +40,8 @@ public class AdsListAct extends AppCompatActivity implements ListAdsView{
         setContentView(R.layout.activity_ads_list);
         ButterKnife.bind(this);
 
-        adapter = new AdAdapter();
+        adapter = new AdAdapter(getAdListener());
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         VerticalSelectionDividerItemDecoration verticalSelectionDividerItemDecoration =
                 new VerticalSelectionDividerItemDecoration(R.dimen.space_recycler, 1);
@@ -91,5 +92,14 @@ public class AdsListAct extends AppCompatActivity implements ListAdsView{
     @Override
     public void showError() {
 
+    }
+
+    private AdAdapter.OnAdClickListener getAdListener() {
+        return new AdAdapter.OnAdClickListener() {
+            @Override
+            public void onClick(Ad ad) {
+                AdDetailsAct.start(AdsListAct.this, ad);
+            }
+        };
     }
 }

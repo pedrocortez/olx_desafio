@@ -3,7 +3,9 @@ package br.com.cortez.desafio.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Photos {
+import java.io.Serializable;
+
+public class Photos implements Serializable {
 
     @SerializedName("thumbnailHd")
     private String thumbnailHd;

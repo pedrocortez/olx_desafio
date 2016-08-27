@@ -3,7 +3,9 @@ package br.com.cortez.desafio.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Ad {
+import java.io.Serializable;
+
+public class Ad implements Serializable {
 
     @SerializedName("title")
     private String title;
@@ -67,14 +69,12 @@ public class Ad {
     }
 
 
-
     public String getFormattedPrice() {
         int leftPart = (int) (this.price / 100);
         int rightPart = (int) (this.price % 100);
 
 
-
-        return "R$ " + leftPart +"," + String.format("%02d", rightPart);
+        return "R$ " + leftPart + "," + String.format("%02d", rightPart);
     }
 
 

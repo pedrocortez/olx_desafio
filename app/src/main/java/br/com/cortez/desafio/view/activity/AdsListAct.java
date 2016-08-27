@@ -2,7 +2,7 @@ package br.com.cortez.desafio.view.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -11,7 +11,6 @@ import java.util.List;
 import br.com.cortez.desafio.ChallengeApplication;
 import br.com.cortez.desafio.R;
 import br.com.cortez.desafio.adapter.AdAdapter;
-import br.com.cortez.desafio.adapter.decoration.VerticalSelectionDividerItemDecoration;
 import br.com.cortez.desafio.model.Ad;
 import br.com.cortez.desafio.presenter.AdsListPresenter;
 import br.com.cortez.desafio.view.ListAdsView;
@@ -42,13 +41,10 @@ public class AdsListAct extends AppCompatActivity implements ListAdsView{
 
         adapter = new AdAdapter(getAdListener());
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        VerticalSelectionDividerItemDecoration verticalSelectionDividerItemDecoration =
-                new VerticalSelectionDividerItemDecoration(R.dimen.space_recycler, 1);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
 
-        listAds.addItemDecoration(verticalSelectionDividerItemDecoration);
         listAds.setAdapter(adapter);
-        listAds.setLayoutManager(linearLayoutManager);
+        listAds.setLayoutManager(gridLayoutManager);
 
 
         adsListPresenter = ChallengeApplication.getInstance().provideAdsListPresenter(this);

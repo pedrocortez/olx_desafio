@@ -35,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                style="@style/TextCommon"
                 tools:text="Nome do Produto" />
 
             <TextView
@@ -42,6 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                style="@style/TextCommon"
                 tools:text="R$ 500.00" />
 
             <TextView
@@ -49,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                style="@style/TextCommon"
                 tools:text="20/11/2015" />
 
         </LinearLayout>

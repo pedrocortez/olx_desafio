@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/olx_ads_thumbnail"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="@dimen/ad_thumbnail_size"
+            android:layout_height="@dimen/ad_thumbnail_size"
             android:scaleType="centerCrop"
             />
 

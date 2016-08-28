@@ -20,6 +20,9 @@
     <dimen name="space_recycler">@dimen/base_spacing_small</dimen>
 
 
+    <dimen name="ad_thumbnail_size">150dp</dimen>
+
+
     <dimen name="ad_round_size">50dp</dimen>
     <dimen name="grid_space">2dp</dimen>
 

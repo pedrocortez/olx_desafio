@@ -25,6 +25,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.ViewHolder> {
     private List<Ad> ads;
     private ImageLoader imageLoader;
     private OnAdClickListener onAdClickListener;
+    private WeakReference<Context> context;
 
     public AdAdapter(OnAdClickListener onAdClickListener) {
         ads = new ArrayList<>();
@@ -42,7 +43,9 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Ad ad = ads.get(position);
 
-        imageLoader.load(ad.getPhotos().getThumbnail(), holder.thumbnail);
+
+        int dimension = (int) getContext().getResources().getDimension(R.dimen.ad_thumbnail_size);
+        imageLoader.load(ad.getPhotos().getThumbnail(), holder.thumbnail, dimension, dimension);
 
 
         holder.title.setText(ad.getTitle());
@@ -66,6 +69,15 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.ViewHolder> {
         this.ads.addAll(ads);
     }
 
+
+
+    private Context getContext() {
+        if(context == null || context.get() == null) {
+            context = new WeakReference<Context>(ChallengeApplication.getInstance());
+        }
+        return context.get();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.olx_ads_thumbnail)
@@ -82,9 +94,9 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.ViewHolder> {
             ButterKnife.bind(this, itemView);
         }
 
-
-
     }
+
+
 
     public interface OnAdClickListener {
 

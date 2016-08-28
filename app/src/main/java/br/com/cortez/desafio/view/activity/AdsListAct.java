@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import java.util.List;
@@ -31,6 +32,9 @@ public class AdsListAct extends AppCompatActivity implements ListAdsView{
     @BindView(R.id.olx_error_layout)
     View error;
 
+    @BindView(R.id.olx_toolbar)
+    Toolbar toolbar;
+
     private AdsListPresenter adsListPresenter;
     private AdAdapter adapter;
 
@@ -39,6 +43,11 @@ public class AdsListAct extends AppCompatActivity implements ListAdsView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ads_list);
         ButterKnife.bind(this);
+
+
+        toolbar.setTitle(R.string.ads_list_title);
+        setSupportActionBar(toolbar);
+
 
         adapter = new AdAdapter(getAdListener());
 

@@ -6,11 +6,13 @@ import com.squareup.otto.Bus;
 
 import java.io.IOException;
 
+import br.com.cortez.desafio.exception.NetworkException;
 import br.com.cortez.desafio.imageLoader.ImageLoader;
 import br.com.cortez.desafio.imageLoader.impl.PicassoImageLoader;
 import br.com.cortez.desafio.presenter.AdsListPresenter;
 import br.com.cortez.desafio.repository.AdRepository;
 import br.com.cortez.desafio.repository.impl.AdRepositoryImpl;
+import br.com.cortez.desafio.util.NetworkUtil;
 import br.com.cortez.desafio.view.ListAdsView;
 import okhttp3.Cache;
 import okhttp3.Interceptor;
@@ -56,9 +58,42 @@ public class ChallengeApplication extends Application {
     public Retrofit provideRetrofit() {
 
         if (retrofit == null) {
+
+            OkHttpClient client = new OkHttpClient
+                    .Builder()
+                    .cache(new Cache(getCacheDir(), 10 * 1024 * 1024)) // 10 MB
+                    .addNetworkInterceptor(new Interceptor() {
+                        @Override
+                        public Response intercept(Chain chain) throws IOException {
+
+                            if(!NetworkUtil.isNetworkAvailable()) {
+                                throw new NetworkException();
+                            }
+
+                            return chain.proceed(chain.request());
+                        }
+                    })
+                    .addInterceptor(new Interceptor() {
+                        @Override public Response intercept(Chain chain) throws IOException {
+                            Request request = chain.request();
+                            if (NetworkUtil.isNetworkAvailable()) {
+                                request = request.newBuilder().header("Cache-Control", "public, max-age=" + 60).build();
+                            } else {
+                                request = request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build();
+                            }
+                            return chain.proceed(request);
+                        }
+                    })
+
+                    .build();
+
+
+
+
             retrofit = new Retrofit.Builder()
                     .baseUrl("http://ahul.github.io/")
                     .addConverterFactory(GsonConverterFactory.create())
+                    .client(client)
                     .build();
         }
         return retrofit;

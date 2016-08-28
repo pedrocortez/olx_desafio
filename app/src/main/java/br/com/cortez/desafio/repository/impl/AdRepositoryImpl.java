@@ -1,8 +1,10 @@
 package br.com.cortez.desafio.repository.impl;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 import br.com.cortez.desafio.ChallengeApplication;
+import br.com.cortez.desafio.exception.NetworkException;
 import br.com.cortez.desafio.model.Ad;
 import br.com.cortez.desafio.presenter.event.InternetError;
 import br.com.cortez.desafio.presenter.event.LoadAdsFailed;
@@ -41,8 +43,13 @@ public class AdRepositoryImpl implements AdRepository {
 
             @Override
             public void onFailure(Call<List<Ad>> call, Throwable t) {
+                if(t instanceof NetworkException
+                        || t instanceof UnknownHostException) {
+                    ChallengeApplication.getInstance().provideBus().post(new InternetError());
+                } else {
+                    ChallengeApplication.getInstance().provideBus().post(new LoadAdsFailed());
+                }
 
-                ChallengeApplication.getInstance().provideBus().post(new InternetError());
             }
         });
     }

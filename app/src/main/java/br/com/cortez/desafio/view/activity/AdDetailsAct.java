@@ -72,7 +72,7 @@ public class AdDetailsAct extends AppCompatActivity implements AdDetailsView{
         toolbar.setTitle(R.string.ad_detail_title);
         setSupportActionBar(toolbar);
 
-        imageLoader.load(ad.getPhotos().getDetailHd(), detail);
+        imageLoader.load(ad.getPhotos().getDetailHd(), detail, R.drawable.ic_ads_placeholder);
         title.setText(ad.getTitle());
         price.setText(ad.getFormattedPrice());
         date.setText(ad.getDate());

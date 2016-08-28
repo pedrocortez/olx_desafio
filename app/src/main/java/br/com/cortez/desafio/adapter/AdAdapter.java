@@ -45,7 +45,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.ViewHolder> {
 
 
         int dimension = (int) getContext().getResources().getDimension(R.dimen.ad_thumbnail_size);
-        imageLoader.load(ad.getPhotos().getThumbnail(), holder.thumbnail, dimension, dimension);
+        imageLoader.load(ad.getPhotos().getThumbnail(),  holder.thumbnail, R.drawable.ic_ads_placeholder, dimension, dimension);
 
 
         holder.title.setText(ad.getTitle());

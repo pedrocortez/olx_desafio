@@ -22,7 +22,7 @@
             android:id="@+id/olx_ads_thumbnail"
             android:layout_width="@dimen/ad_thumbnail_size"
             android:layout_height="@dimen/ad_thumbnail_size"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             />
 
         <TextView

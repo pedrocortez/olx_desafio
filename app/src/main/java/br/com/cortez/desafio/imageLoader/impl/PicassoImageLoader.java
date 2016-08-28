@@ -30,6 +30,7 @@ public class PicassoImageLoader implements ImageLoader {
         Picasso.with(getContext())
                 .load(url)
                 .placeholder(placeHolder)
+
                 .into(imageView);
     }
 

@@ -1,26 +1,19 @@
-package br.com.cortez.desafio.adapter.decoration;
+package br.com.cortez.desafio.view.decoration;
 
-import android.content.Context;
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import java.lang.ref.WeakReference;
 
-import br.com.cortez.desafio.ChallengeApplication;
-
-public class VerticalSelectionDividerItemDecoration extends RecyclerView.ItemDecoration {
-
-
-    WeakReference<Context> contextWeakReference;
+public class GridDividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private int mSizeGridSpacingPx;
     private int mGridSize;
 
     private boolean mNeedLeftSpacing = false;
 
-    public VerticalSelectionDividerItemDecoration(int resourceSize, int gridSize) {
-        mSizeGridSpacingPx = getPixelSize(resourceSize);
+    public GridDividerItemDecoration(int gridSpacingPx, int gridSize) {
+        mSizeGridSpacingPx = gridSpacingPx;
         mGridSize = gridSize;
     }
 
@@ -31,10 +24,13 @@ public class VerticalSelectionDividerItemDecoration extends RecyclerView.ItemDec
 
         int padding = parent.getWidth() / mGridSize - frameWidth;
 
-
         int itemPosition = ((RecyclerView.LayoutParams) view.getLayoutParams()).getViewAdapterPosition();
 
-        outRect.top = mSizeGridSpacingPx;
+        if (itemPosition < mGridSize) {
+            outRect.top = 0;
+        } else {
+            outRect.top = mSizeGridSpacingPx;
+        }
 
         if (itemPosition % mGridSize == 0) {
 
@@ -65,18 +61,5 @@ public class VerticalSelectionDividerItemDecoration extends RecyclerView.ItemDec
             outRect.right = mSizeGridSpacingPx / 2;
         }
         outRect.bottom = 0;
-    }
-
-
-    private int getPixelSize(int resource) {
-        return getContext().getResources().getDimensionPixelSize(resource);
-    }
-
-    private Context getContext() {
-
-        if (contextWeakReference == null) {
-            contextWeakReference = new WeakReference<Context>(ChallengeApplication.getInstance());
-        }
-        return contextWeakReference.get();
     }
 }

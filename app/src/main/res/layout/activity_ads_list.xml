@@ -24,10 +24,8 @@
         android:id="@+id/olx_listads"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingEnd="@dimen/space_recycler"
-        android:paddingLeft="@dimen/space_recycler"
-        android:paddingRight="@dimen/space_recycler"
-        android:paddingStart="@dimen/space_recycler" />
+        android:layout_margin="@dimen/base_spacing_micro"
+        />
 
 
 </LinearLayout>

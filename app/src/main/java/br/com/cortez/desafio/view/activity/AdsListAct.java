@@ -14,6 +14,7 @@ import br.com.cortez.desafio.adapter.AdAdapter;
 import br.com.cortez.desafio.model.Ad;
 import br.com.cortez.desafio.presenter.AdsListPresenter;
 import br.com.cortez.desafio.view.ListAdsView;
+import br.com.cortez.desafio.view.decoration.GridDividerItemDecoration;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -41,8 +42,14 @@ public class AdsListAct extends AppCompatActivity implements ListAdsView{
 
         adapter = new AdAdapter(getAdListener());
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
 
+        int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.grid_space);
+        int gridSize = 2;
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        GridDividerItemDecoration gridDividerItemDecoration = new GridDividerItemDecoration(dimensionPixelSize, gridSize);
+
+        listAds.addItemDecoration(gridDividerItemDecoration);
         listAds.setAdapter(adapter);
         listAds.setLayoutManager(gridLayoutManager);
 

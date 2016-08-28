@@ -21,6 +21,7 @@
 
 
     <dimen name="ad_round_size">50dp</dimen>
+    <dimen name="grid_space">2dp</dimen>
 
 
 </resources>

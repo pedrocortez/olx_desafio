@@ -12,6 +12,8 @@ public interface ListAdsView {
 
     void showAds(List<Ad> ads);
 
-    void showError();
+    void showGenericError();
+
+    void showInternetError();
 
 }

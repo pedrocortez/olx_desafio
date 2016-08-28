@@ -20,6 +20,8 @@ public class PicassoImageLoader implements ImageLoader {
 
     @Override
     public void load(String url, ImageView imageView) {
+
+
         Picasso.with(getContext())
                 .load(url)
                 .into(imageView);
@@ -41,6 +43,15 @@ public class PicassoImageLoader implements ImageLoader {
                 .resize(width, height)
                 .into(imageView);
     }
+
+    @Override
+    public void load(int resource, ImageView imageView, int width, int height) {
+        Picasso.with(getContext())
+                .load(resource)
+                .resize(width, height)
+                .into(imageView);
+    }
+
 
     @Override
     public void load(String url, ImageView imageView, int placeholder, int width, int height) {

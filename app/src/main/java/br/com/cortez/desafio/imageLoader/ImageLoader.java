@@ -10,6 +10,8 @@ public interface ImageLoader {
 
     void load(String url, ImageView imageView, int width, int height);
 
+    void load(int resource, ImageView imageView, int width, int height);
+
     void load(String url, ImageView imageView, int placeholder,  int width, int height);
 
 }

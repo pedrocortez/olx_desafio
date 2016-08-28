@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Desafio</string>
-    <string name="generic_error">Ocorreu um erro inesperado</string>
+
+    <string name="generic_error">Ocorreu um erro inesperado.</string>
+    <string name="internet_error">Nenhuma conexão foi encontrada. Conecte-se e tente novamente.</string>
 
     <string name="ads_list_title">Lista de Anúncios</string>
 

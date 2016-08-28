@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.cortez.desafio.ChallengeApplication;
 import br.com.cortez.desafio.model.Ad;
+import br.com.cortez.desafio.presenter.event.InternetError;
 import br.com.cortez.desafio.presenter.event.LoadAdsFailed;
 import br.com.cortez.desafio.presenter.event.LoadAdsSuccess;
 import br.com.cortez.desafio.repository.AdRepository;
@@ -11,6 +12,7 @@ import br.com.cortez.desafio.repository.http.AdHttpService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by Pedro on 8/24/16.
@@ -39,9 +41,8 @@ public class AdRepositoryImpl implements AdRepository {
 
             @Override
             public void onFailure(Call<List<Ad>> call, Throwable t) {
-                if(!call.isCanceled()) {
-                    ChallengeApplication.getInstance().provideBus().post(new LoadAdsFailed());
-                }
+
+                ChallengeApplication.getInstance().provideBus().post(new InternetError());
             }
         });
     }

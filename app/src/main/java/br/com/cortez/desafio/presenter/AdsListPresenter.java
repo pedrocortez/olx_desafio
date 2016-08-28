@@ -3,6 +3,7 @@ package br.com.cortez.desafio.presenter;
 import com.squareup.otto.Subscribe;
 
 import br.com.cortez.desafio.ChallengeApplication;
+import br.com.cortez.desafio.presenter.event.InternetError;
 import br.com.cortez.desafio.presenter.event.LoadAdsFailed;
 import br.com.cortez.desafio.presenter.event.LoadAdsSuccess;
 import br.com.cortez.desafio.repository.AdRepository;
@@ -36,8 +37,16 @@ public class AdsListPresenter {
     @Subscribe
     public void onFailedLoadAds(LoadAdsFailed loadAdsFailed) {
         listAdsView.hideLoading();
-        listAdsView.showError();
+        listAdsView.showGenericError();
     }
+
+    @Subscribe
+    public void onFailedLoadAds(InternetError internetError) {
+        listAdsView.hideLoading();
+        listAdsView.showInternetError();
+    }
+
+
 
 
     public void resume() {

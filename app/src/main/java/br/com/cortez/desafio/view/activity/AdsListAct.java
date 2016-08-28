@@ -1,15 +1,14 @@
 package br.com.cortez.desafio.view.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -48,6 +47,9 @@ public class AdsListAct extends AppCompatActivity implements ListAdsView {
     private AdAdapter adapter;
     private ImageLoader imageLoader;
 
+    int gridSpanCount;
+    GridDividerItemDecoration gridDividerItemDecoration;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,19 +61,15 @@ public class AdsListAct extends AppCompatActivity implements ListAdsView {
         toolbar.setTitle(R.string.ads_list_title);
         setSupportActionBar(toolbar);
 
-
-        adapter = new AdAdapter(getAdListener());
-
+        configSpanCount();
 
         int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.grid_space);
-        int gridSize = 2;
-
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        GridDividerItemDecoration gridDividerItemDecoration = new GridDividerItemDecoration(dimensionPixelSize, gridSize);
-
+        gridDividerItemDecoration = new GridDividerItemDecoration(dimensionPixelSize, gridSpanCount);
         listAds.addItemDecoration(gridDividerItemDecoration);
+        adapter = new AdAdapter(getAdListener());
+
         listAds.setAdapter(adapter);
-        listAds.setLayoutManager(gridLayoutManager);
+        configLayoutGrid();
 
 
         adsListPresenter = ChallengeApplication.getInstance().provideAdsListPresenter(this);
@@ -143,5 +141,39 @@ public class AdsListAct extends AppCompatActivity implements ListAdsView {
                 AdDetailsAct.start(AdsListAct.this, ad);
             }
         };
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        configSpanCount();
+        configLayoutGrid();
+    }
+
+    private void configSpanCount() {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            gridSpanCount = 3;
+        } else {
+            gridSpanCount = 2;
+        }
+    }
+
+    private void configLayoutGrid() {
+
+
+        listAds.removeItemDecoration(gridDividerItemDecoration);
+        listAds.invalidateItemDecorations();
+
+        int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.grid_space);
+        gridDividerItemDecoration = new GridDividerItemDecoration(dimensionPixelSize, gridSpanCount);
+        listAds.addItemDecoration(gridDividerItemDecoration);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, gridSpanCount);
+        listAds.setLayoutManager(gridLayoutManager);
+
+
+        listAds.invalidate();
+        adapter.notifyDataSetChanged();
+
     }
 }

@@ -19,26 +19,18 @@ public class GridDividerItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-
         int frameWidth = (int) ((parent.getWidth() - (float) mSizeGridSpacingPx * (mGridSize - 1)) / mGridSize);
-
         int padding = parent.getWidth() / mGridSize - frameWidth;
-
         int itemPosition = ((RecyclerView.LayoutParams) view.getLayoutParams()).getViewAdapterPosition();
-
         if (itemPosition < mGridSize) {
             outRect.top = 0;
         } else {
             outRect.top = mSizeGridSpacingPx;
         }
-
         if (itemPosition % mGridSize == 0) {
-
             outRect.left = 0;
             outRect.right = padding;
             mNeedLeftSpacing = true;
-
-
         } else if ((itemPosition + 1) % mGridSize == 0) {
             mNeedLeftSpacing = false;
             outRect.right = 0;
@@ -62,4 +54,5 @@ public class GridDividerItemDecoration extends RecyclerView.ItemDecoration {
         }
         outRect.bottom = 0;
     }
+
 }

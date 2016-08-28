@@ -68,6 +68,8 @@ public class AdDetailsAct extends AppCompatActivity implements AdDetailsView{
     @Override
     public void showAdDetail() {
 
+
+        toolbar.setTitle(R.string.ad_detail_title);
         setSupportActionBar(toolbar);
 
         imageLoader.load(ad.getPhotos().getDetailHd(), detail);

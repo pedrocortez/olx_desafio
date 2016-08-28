@@ -5,7 +5,7 @@
     android:id="@+id/ad_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
+    android:background="@color/colorLightPrimary"
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
@@ -23,6 +23,7 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
+            app:expandedTitleTextAppearance="@style/TextCommon.Toolbar.Collapsed"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
@@ -51,39 +52,83 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/base_spacing_default">
 
             <TextView
                 android:id="@+id/olx_ad_title"
-                style="@style/TextCommon"
+                style="@style/TextCommon.Title.Details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 tools:text="title" />
 
-            <TextView
-                android:id="@+id/olx_ad_price"
-                style="@style/TextCommon"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="title" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/olx_ad_date"
-                style="@style/TextCommon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="title" />
+                <TextView
+                    android:id="@+id/olx_ad_price"
+                    style="@style/TextCommon.Price.Details"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    tools:text="title" />
 
-            <TextView
-                android:id="@+id/olx_ad_seller"
-                style="@style/TextCommon"
+                <TextView
+                    android:id="@+id/olx_ad_date"
+                    style="@style/TextCommon.Ad.Date"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    tools:text="title" />
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="@dimen/base_spacing_default"
+                android:layout_marginTop="@dimen/base_spacing_default"
+                android:background="@color/colorAccent" />
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="title" />
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextCommon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/base_spacing_default"
+                    android:layout_marginRight="@dimen/base_spacing_default"
+                    android:text="@string/ad_detail_seller_title" />
+
+
+                <TextView
+                    android:id="@+id/olx_ad_seller"
+                    style="@style/TextCommon.Seller"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="title" />
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="@dimen/base_spacing_default"
+                android:layout_marginTop="@dimen/base_spacing_default"
+                android:background="@color/colorAccent" />
 
             <TextView
                 android:id="@+id/olx_ad_zipcode"
-                style="@style/TextCommon"
+                style="@style/TextCommon.ZipCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="title" />

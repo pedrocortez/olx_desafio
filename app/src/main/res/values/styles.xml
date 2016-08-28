@@ -11,14 +11,53 @@
 
     <style name="TextCommon" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">@dimen/base_font_medium</item>
+        <item name="android:gravity">center_vertical</item>
+
     </style>
 
-    <style name="TextCommon.title" parent="TextAppearance.AppCompat">
+
+    <style name="TextCommon.Title" parent="TextCommon">
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textSize">@dimen/base_font_large</item>
         <item name="android:textStyle">bold</item>
+    </style>
 
+    <style name="TextCommon.Title.Details" parent="TextCommon.Title">
+        <item name="android:textSize">@dimen/base_font_extra_large</item>
+    </style>
+
+    <style name="TextCommon.Toolbar.Collapsed" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+
+    <style name="TextCommon.Ad.Date" parent="TextCommon">
+        <item name="android:drawableLeft">@drawable/ic_calendar</item>
+        <item name="android:drawableStart">@drawable/ic_calendar</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="TextCommon.Price" parent="TextCommon">
+        <item name="android:drawableLeft">@drawable/ic_pricetag</item>
+        <item name="android:drawableStart">@drawable/ic_pricetag</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
 
+    <style name="TextCommon.Price.Details" parent="TextCommon.Price">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/base_font_large</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextCommon.Seller" parent="TextCommon">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextCommon.ZipCode" parent="TextCommon">
+        <item name="android:drawableLeft">@drawable/ic_place</item>
+        <item name="android:drawableStart">@drawable/ic_place</item>
+        <item name="android:drawablePadding">@dimen/base_spacing_small</item>
+
+    </style>
 </resources>

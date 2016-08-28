@@ -3,4 +3,8 @@
     <string name="generic_error">Ocorreu um erro inesperado</string>
 
     <string name="ads_list_title">Lista de Anúncios</string>
+
+    <string name="ad_detail_title">Anúncio</string>
+    <string name="ad_detail_seller_title">Anunciante</string>
+
 </resources>

@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            style="@style/TextCommon.title"
+            style="@style/TextCommon.Title"
             android:gravity="center_horizontal"
             tools:text="Nome do Produto" />
 
@@ -39,19 +39,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingTop="@dimen/base_spacing_small"
             >
-
-
 
             <TextView
                 android:id="@+id/olx_ads_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                style="@style/TextCommon"
-                android:drawableLeft="@drawable/ic_pricetag"
-                android:drawableStart="@drawable/ic_pricetag"
-                android:layout_weight="1"
+                style="@style/TextCommon.Price"
                 android:gravity="center_vertical"
                 tools:text="R$ 500.00" />
 
@@ -59,12 +54,7 @@
                 android:id="@+id/olx_ads_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                style="@style/TextCommon"
-                android:drawableLeft="@drawable/ic_calendar"
-                android:drawableStart="@drawable/ic_calendar"
-                android:gravity="center_vertical"
+                style="@style/TextCommon.Ad.Date"
                 tools:text="20/11/2015" />
 
         </LinearLayout>

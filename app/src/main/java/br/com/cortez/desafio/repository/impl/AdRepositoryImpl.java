@@ -4,17 +4,16 @@ import java.net.UnknownHostException;
 import java.util.List;
 
 import br.com.cortez.desafio.ChallengeApplication;
-import br.com.cortez.desafio.exception.NetworkException;
 import br.com.cortez.desafio.model.Ad;
 import br.com.cortez.desafio.presenter.event.InternetError;
 import br.com.cortez.desafio.presenter.event.LoadAdsFailed;
 import br.com.cortez.desafio.presenter.event.LoadAdsSuccess;
 import br.com.cortez.desafio.repository.AdRepository;
 import br.com.cortez.desafio.repository.http.AdHttpService;
+import br.com.cortez.desafio.util.NetworkUtil;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * Created by Pedro on 8/24/16.
@@ -37,14 +36,17 @@ public class AdRepositoryImpl implements AdRepository {
                     List<Ad> ads = response.body();
                     ChallengeApplication.getInstance().provideBus().post(new LoadAdsSuccess(ads));
                 } else {
-                    ChallengeApplication.getInstance().provideBus().post(new LoadAdsFailed());
+                    if(NetworkUtil.isNetworkAvailable()) {
+                        ChallengeApplication.getInstance().provideBus().post(new LoadAdsFailed());
+                    } else {
+                        ChallengeApplication.getInstance().provideBus().post(new InternetError());
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<List<Ad>> call, Throwable t) {
-                if(t instanceof NetworkException
-                        || t instanceof UnknownHostException) {
+                if(t instanceof UnknownHostException) {
                     ChallengeApplication.getInstance().provideBus().post(new InternetError());
                 } else {
                     ChallengeApplication.getInstance().provideBus().post(new LoadAdsFailed());

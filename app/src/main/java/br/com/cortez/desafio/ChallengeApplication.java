@@ -6,7 +6,6 @@ import com.squareup.otto.Bus;
 
 import java.io.IOException;
 
-import br.com.cortez.desafio.exception.NetworkException;
 import br.com.cortez.desafio.imageLoader.ImageLoader;
 import br.com.cortez.desafio.imageLoader.impl.PicassoImageLoader;
 import br.com.cortez.desafio.presenter.AdsListPresenter;
@@ -62,17 +61,6 @@ public class ChallengeApplication extends Application {
             OkHttpClient client = new OkHttpClient
                     .Builder()
                     .cache(new Cache(getCacheDir(), 10 * 1024 * 1024)) // 10 MB
-                    .addNetworkInterceptor(new Interceptor() {
-                        @Override
-                        public Response intercept(Chain chain) throws IOException {
-
-                            if(!NetworkUtil.isNetworkAvailable()) {
-                                throw new NetworkException();
-                            }
-
-                            return chain.proceed(chain.request());
-                        }
-                    })
                     .addInterceptor(new Interceptor() {
                         @Override public Response intercept(Chain chain) throws IOException {
                             Request request = chain.request();

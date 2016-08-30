@@ -78,8 +78,8 @@ public class AdsListAct extends AppCompatActivity implements ListAdsView {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
         adsListPresenter.resume();
     }
 
@@ -129,9 +129,6 @@ public class AdsListAct extends AppCompatActivity implements ListAdsView {
     public void showInternetError() {
         showError();
         errorText.setText(R.string.internet_error);
-
-        int dimension = (int) getResources().getDimension(R.dimen.ad_thumbnail_size);
-        imageLoader.load(R.drawable.no_connection, errorImage, dimension, dimension);
     }
 
     private AdAdapter.OnAdClickListener getAdListener() {

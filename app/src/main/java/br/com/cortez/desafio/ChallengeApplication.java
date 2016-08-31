@@ -34,7 +34,6 @@ public class ChallengeApplication extends Application {
     private Bus bus;
 
     private AdRepository adRepository;
-    private AdsListPresenter adsListPresenter;
 
     @Override
     public void onCreate() {
@@ -103,9 +102,6 @@ public class ChallengeApplication extends Application {
     }
 
     public AdsListPresenter provideAdsListPresenter(ListAdsView listAdsView) {
-        if(adsListPresenter == null) {
-            adsListPresenter = new AdsListPresenter(listAdsView, provideAdRepository());
-        }
-        return adsListPresenter;
+        return new AdsListPresenter(listAdsView, provideAdRepository());
     }
 }
